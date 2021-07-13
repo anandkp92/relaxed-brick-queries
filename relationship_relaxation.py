@@ -5,6 +5,7 @@ from utils import *
 
 brick_graph = brickschema.Graph(load_brick=True)
 relationship_domain_range_map = get_relationship_domain_range_map()
+shacl_relationship_map = get_shacl_relationship_map()
 
 def apply_rule_variable_relationship(triple):
     t0 = triple[0]
@@ -50,31 +51,66 @@ def apply_rule_variable_relationship(triple):
         d = relationship_domain_range_map.get(relationship, {}).get('domain', None)
         r = relationship_domain_range_map.get(relationship, {}).get('range', None)
         
+        possible_relaxation = False
+
+        ## first check if the relaxed triple matches the properties (domain, range) of the relationships
+        
         if sub is None and obj is None:
-            relaxed_triples.append([t0, relationship, t2])
+            # if subject and object are variables (?x, ?y), all relationships are possible
+            possible_relaxation = True
         elif sub is None:
             if r is None:
-                relaxed_triples.append([t0, relationship, t2])
+                possible_relaxation = True
             else:
                 if r in obj_super_classes:
-                    relaxed_triples.append([t0, relationship, t2])
+                    possible_relaxation = True
         elif obj is None:
             if d is None:
-                relaxed_triples.append([t0, relationship, t2])
+                possible_relaxation = True
             else:
                 if d in sub_super_classes:
-                    relaxed_triples.append([t0, relationship, t2])
+                    possible_relaxation = True
         else:
             if d is None and r is None:
-                relaxed_triples.append([t0, relationship, t2])
+                possible_relaxation = True
             elif d is None:
                 if r in obj_super_classes:
-                    relaxed_triples.append([t0, relationship, t2])
+                    possible_relaxation = True
             elif r is None:
                 if d in sub_super_classes:
-                    relaxed_triples.append([t0, relationship, t2])
+                    possible_relaxation = True
             else:
                 if r in obj_super_classes and d in sub_super_classes:
-                    relaxed_triples.append([t0, relationship, t2])
+                    possible_relaxation = True
+        
+        ## below is checking to ensure that the relaxed triple conforms to the shacl shapes
+        if possible_relaxation:
+            shacl_shapes = shacl_relationship_map.get(relationship, None)
+            if shacl_shapes is not None:
+                
+                shape_condition = False
+                for shape in shacl_shapes:
+                    allowed_subject = shape.get('subject', None)
+                    allowed_object = shape.get('object', None)
+                     
+                    #TODO: add conditions when sub, obj are none
+                    if sub is not None and obj is not None:
+                        if allowed_subject in sub_super_classes and allowed_object in obj_super_classes:
+                            shape_condition = True
+                    elif sub is not None:
+                        if allowed_subject in sub_super_classes:
+                            shape_condition = True
+                    elif obj is not None:
+                        if allowed_object in obj_super_classes:
+                            shape_condition = True
+                    else:
+                        # if subject and object are variables (?x, ?y), all relationships are possible
+                        shape_condition = True
+                
+                if not shape_condition:
+                    possible_relaxation = False
+                    
+        if possible_relaxation:
+            relaxed_triples.append([t0, relationship, t2])
 
     return relaxed_triples

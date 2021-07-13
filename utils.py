@@ -74,15 +74,47 @@ def get_relationship_domain_range_map():
 
         range_triples = brick_graph.triples((relationship, RDFS['range'], None))
         for r in range_triples:
-            if relationship_domain_range_map.get('relationship') is None:
+            if relationship_domain_range_map.get(relationship).get('range') is None:
                 relationship_domain_range_map[relationship]['range'] = r[2]
 
         domain_triples = brick_graph.triples((relationship, RDFS['domain'], None))
         for d in domain_triples:
-            if relationship_domain_range_map.get('relationship') is None:
+            if relationship_domain_range_map.get(relationship).get('domain') is None:
                 relationship_domain_range_map[relationship]['domain']= d[2]
 
     return relationship_domain_range_map
+
+def get_shacl_relationship_map():
+    g = brickschema.Graph()
+    g.parse("https://raw.githubusercontent.com/BrickSchema/Brick/master/shacl/BrickEntityShapeBase.ttl", format="ttl")
+
+    q = """SELECT ?cls ?path ?allowed WHERE {
+        ?sh a sh:NodeShape .
+        ?sh sh:targetClass ?cls .
+        ?sh sh:property ?prop .
+        ?prop sh:path ?path .
+        {
+            ?prop sh:class ?allowed
+        }
+        UNION
+        {
+            ?prop sh:or/rdf:rest*/rdf:first/sh:class ?allowed
+        }
+    }"""
+
+    shacl_results = g.query(q)
+    
+    shacl_relationship_map = {}
+    for row in shacl_results:
+        sub = row[0]
+        rel = row[1]
+        obj = row[2]
+
+        if shacl_relationship_map.get(rel) is None:
+            shacl_relationship_map[rel] = []
+
+        shacl_relationship_map[rel].append({'subject': sub, 'object':obj})
+    return shacl_relationship_map
 
 def get_all_equipment(t=None):
     if t is None:
