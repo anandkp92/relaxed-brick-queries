@@ -43,6 +43,12 @@ def get_namespace(x):
     elif ns.lower() == 'sh':
         return SH
 
+def parse_entity(t):
+    if isinstance(t, URIRef):
+        return t.rsplit('/',1)[1].replace('#',':')
+    else:
+        return t    
+
 def get_inverse_relationship(relationship):
     inverse_relns = list(brick_graph.triples((relationship, OWL['inverseOf'], None)))
     if len(inverse_relns) == 1:

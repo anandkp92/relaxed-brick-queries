@@ -11,6 +11,8 @@ brick_graph = brickschema.Graph(load_brick=True)
 
 def parse_triple(triple):
     t0 = triple[2]
+    if t0[0] == '?':
+        return None
     sub_ns = get_namespace(t0.split(':')[0])
     sub_entity = t0.split(':')[1]
     entity = sub_ns[sub_entity]

@@ -8,9 +8,9 @@ relationship_domain_range_map = get_relationship_domain_range_map()
 shacl_relationship_map = get_shacl_relationship_map()
 
 def apply_rule_variable_relationship(triple):
-    t0 = triple[0]
-    t1 = triple[1]
-    t2 = triple[2]
+    t0 = parse_entity(triple[0])
+    t1 = parse_entity(triple[1])
+    t2 = parse_entity(triple[2])
     
     sub = None
     rel = None
@@ -20,16 +20,25 @@ def apply_rule_variable_relationship(triple):
     variable_object = False
     
     if t0[0] != '?':
-        sub_ns = get_namespace(t0.split(':')[0])
-        sub_entity = t0.split(':')[1]
+        sub_ns = get_namespace(t0)
+        if ':' in t0:
+            sub_entity = t0.split(':')[1]
+        elif '#' in t0:
+            sub_entity = t0.split('#')[1]
+        else:
+            sub_entity = None
         sub = sub_ns[sub_entity]
         
     if t1[0] != '?':
         if t1 == 'a':
             rel = RDF['type']
         elif ':' in t1:
-            rel_ns = get_namespace(t1.split(':')[0])
+            rel_ns = get_namespace(t1)            
             rel_entity = t1.split(':')[1]
+            rel = rel_ns[rel_entity]
+        elif '#' in t1:
+            rel_ns = get_namespace(t1)
+            rel_entity = t1.split('#')[1]
             rel = rel_ns[rel_entity]
         else:
             rel_ns = get_namespace(t1)
@@ -37,8 +46,13 @@ def apply_rule_variable_relationship(triple):
             rel = rel_ns[rel_entity]
         
     if t2[0] != '?':
-        obj_ns = get_namespace(t2.split(':')[0])
-        obj_entity = t2.split(':')[1]
+        obj_ns = get_namespace(t2)
+        if ':' in t2:
+            obj_entity = t2.split(':')[1]
+        elif '#' in t2:
+            obj_entity = t2.split('#')[1]
+        else:
+            obj_entity = None
         obj = obj_ns[obj_entity]
 
     sub_super_classes = get_super_classes(entity=sub)
