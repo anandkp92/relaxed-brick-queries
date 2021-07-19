@@ -64,10 +64,18 @@ def get_inverse_relationship(relationship):
 def get_all_brick_relationships():
     relationships = []
     relationship_triples = brick_graph.triples((None, RDF['type'], OWL['ObjectProperty']))
+    ignore_relationships = [
+                                BRICK['hasAssociatedTag'], BRICK['feedsAir'], BRICK['controls'], 
+                                BRICK['hasTimeseriesId'], BRICK['isTagOf'], BRICK['storedAt'], 
+                                BRICK['hasUnit'], BRICK['value'], BRICK['hasOutputSubstance'], 
+                                BRICK['hasInputSubstance'], BRICK['measures'], BRICK['isMeasuredBy'],
+                                BRICK['hasAddress'], BRICK['regulates'], BRICK['isRegulatedBy'],
+                                BRICK['timeseries'], BRICK['hasTag'], BRICK['isAssociatedWith']
+                            ]
     for r in relationship_triples:
         relationship = r[0]
         inv_relationship = get_inverse_relationship(relationship)
-        if relationship not in relationships:# and inv_relationship not in relationships:
+        if relationship not in relationships and relationship not in ignore_relationships:
             relationships.append(relationship)
     return relationships
 
