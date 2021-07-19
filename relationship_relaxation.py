@@ -12,6 +12,9 @@ def apply_rule_variable_relationship(triple):
     t1 = parse_entity(triple[1])
     t2 = parse_entity(triple[2])
     
+    if t1.lower() == 'a' or t1.lower() =='rdf:type' or t1 == RDF['type']:
+        return []
+    
     sub = None
     rel = None
     obj = None
@@ -128,3 +131,14 @@ def apply_rule_variable_relationship(triple):
             relaxed_triples.append([t0, relationship, t2])
 
     return relaxed_triples
+
+
+def apply_rule_transitive_relationship(triple):
+    t0 = parse_entity(triple[0])
+    t1 = parse_entity(triple[1])
+    t2 = parse_entity(triple[2])
+    
+    if t1.lower() == 'a' or t1.lower() =='rdf:type' or t1 == RDF['type']:
+        return []
+    
+    return [[t0, t1+'+', t2]]
