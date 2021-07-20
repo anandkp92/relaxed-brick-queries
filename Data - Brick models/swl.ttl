@@ -1,0 +1,36 @@
+@prefix bldg: <http://buildsys.org/ontologies/SWL#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:ABOVE a brick:HVAC_Zone .
+
+bldg:AH01 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:SWL.AHU.AH01.Cooling_Valve_Output ;
+    brick:isFedBy bldg:chiller .
+
+bldg:SWL a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 3437 ] .
+
+bldg:SWL.AH1.ZONE.ABOVE.STPT a brick:Setpoint ;
+    rdfs:label "SWL.AH1.ZONE.ABOVE.STPT" ;
+    brick:timeseries [ brick:hasTimeseriesId "dfa8d3e6-b461-3d5a-ad18-9ec3e53f174d" ] .
+
+bldg:SWL.AHU.AH01.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "SWL.AHU.AH01.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "a3e6899b-a80e-39b1-b12d-c28c98c95811" ] .
+
+bldg:SWL.CHW.SUPFLOW a brick:Supply_Air_flow ;
+    rdfs:label "SWL.CHW.SUPFLOW" ;
+    brick:timeseries [ brick:hasTimeseriesId "0fbdab67-1af8-3c22-867b-f0808081ecaf" ] .
+
+bldg:SWL.CHW.SUPTEMP a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "SWL.CHW.SUPTEMP" ;
+    brick:timeseries [ brick:hasTimeseriesId "5152b7e3-7b8a-314c-840a-86cf07a45725" ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:SWL.CHW.SUPFLOW,
+        bldg:SWL.CHW.SUPTEMP .
+

@@ -1,0 +1,71 @@
+@prefix bldg: <http://buildsys.org/ontologies/GILM#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:AHU01 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:GILM.AHU.AHU01.CCV,
+        bldg:GILM.AHU.AHU01.Cooling_Valve_Output,
+        bldg:GILM.AHU.AHU01.Mixed_Air_Temp,
+        bldg:GILM.AHU.AHU01.Outside_Air_Temp,
+        bldg:GILM.AHU.AHU01.Supply_Air_Temp ;
+    brick:isFedBy bldg:chiller .
+
+bldg:GILM a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 42946 ] .
+
+bldg:GILM.AHU.AHU01.CCV a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "GILM.AHU.AHU01.CCV" ;
+    brick:timeseries [ brick:hasTimeseriesId "8af05fc6-caf5-3123-b292-e12b74ae975d" ] .
+
+bldg:GILM.AHU.AHU01.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "GILM.AHU.AHU01.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "4cbd082d-987b-31a9-b8b5-32418c800ea3" ] .
+
+bldg:GILM.AHU.AHU01.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "GILM.AHU.AHU01.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "5e17be8d-5d6d-3810-b960-3031d6bd27ef" ] .
+
+bldg:GILM.AHU.AHU01.Outside_Air_Temp a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "GILM.AHU.AHU01.Outside Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "1cccc754-a1d8-3b59-8173-cce5c781bafa" ] .
+
+bldg:GILM.AHU.AHU01.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "GILM.AHU.AHU01.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "cde1ca9d-1860-3090-a469-15fb89a75513" ] .
+
+bldg:GILM.CHW.CHWSSETPOINT a brick:Chilled_Water_Supply_Temperature_Setpoint ;
+    rdfs:label "GILM.CHW.CHWSSETPOINT" ;
+    brick:timeseries [ brick:hasTimeseriesId "c9413e60-5291-3c16-b1f7-ce39d8bf4c2c" ] .
+
+bldg:GILM.CHW.ECONOMIZER a brick:Damper_Position_Command ;
+    rdfs:label "GILM.CHW.ECONOMIZER" ;
+    brick:timeseries [ brick:hasTimeseriesId "37d5fdcf-acc5-3e30-93a0-a38846532ed3" ] .
+
+bldg:GILM.CHW.Loop_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "GILM.CHW.Loop Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "a200c2ec-144a-3307-bcb2-073ee2bf24d4" ] .
+
+bldg:GILM.CHW.Loop_Chilled_Water_Return_Temp_Setpoint a brick:Chilled_Water_Return_Temperature_Setpoint ;
+    rdfs:label "GILM.CHW.Loop Chilled Water Return Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "58454e67-e9cd-3f97-a015-694ea3606706" ] .
+
+bldg:GILM.CHW.Loop_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "GILM.CHW.Loop Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "d79e705d-532c-3a69-bdbe-647befad39a8" ] .
+
+bldg:GILM.CHW.Loop_Chilled_Water_Supply_Temp_Setpoint a brick:Chilled_Water_Supply_Temperature_Setpoint ;
+    rdfs:label "GILM.CHW.Loop Chilled Water Supply Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "7bd5c86c-60a0-3be9-9eba-da82f397f536" ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:GILM.CHW.CHWSSETPOINT,
+        bldg:GILM.CHW.ECONOMIZER,
+        bldg:GILM.CHW.Loop_Chilled_Water_Return_Temp,
+        bldg:GILM.CHW.Loop_Chilled_Water_Return_Temp_Setpoint,
+        bldg:GILM.CHW.Loop_Chilled_Water_Supply_Temp,
+        bldg:GILM.CHW.Loop_Chilled_Water_Supply_Temp_Setpoint .
+

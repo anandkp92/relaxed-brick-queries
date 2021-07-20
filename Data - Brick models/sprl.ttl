@@ -1,0 +1,45 @@
+@prefix bldg: <http://buildsys.org/ontologies/SPRL#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:SPRL a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 53797 ] .
+
+bldg:Sproul_ChilledWater_Demand_kBtu a brick:Electric_Meter ;
+    rdfs:label "Sproul_ChilledWater_Demand_kBtu" ;
+    brick:isPointOf bldg:chiller ;
+    brick:timeseries [ brick:hasTimeseriesId "8289f5a2-1594-3a3b-8623-4e7d6c321fb8" ] .
+
+bldg:Sproul_Electricity_Demand_kBtu a brick:Building_Electric_Meter ;
+    rdfs:label "Sproul_Electricity_Demand_kBtu" ;
+    brick:timeseries [ brick:hasTimeseriesId "bb32ca9c-cbbf-3aed-87a9-4d0acc66c4dc" ] .
+
+bldg:SPRL.CHW.BCHWR a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "SPRL.CHW.BCHWR" ;
+    brick:timeseries [ brick:hasTimeseriesId "8d64eaaf-a117-38e3-adc3-bd3a9c61991c" ] .
+
+bldg:SPRL.CHW.BCHWS a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "SPRL.CHW.BCHWS" ;
+    brick:timeseries [ brick:hasTimeseriesId "1dccb25b-a5a3-3f4b-a7de-b680cd45387d" ] .
+
+bldg:SPRL.CHW.Building_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "SPRL.CHW.Building Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "fc3f783b-beca-305d-a15c-420447f7c989" ] .
+
+bldg:SPRL.CHW.Building_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "SPRL.CHW.Building Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "07e00fe0-37cc-31aa-b29b-9c5251106938" ] .
+
+bldg:SPRL.CHW.ECONOMIZER a brick:Damper_Position_Command ;
+    rdfs:label "SPRL.CHW.ECONOMIZER" ;
+    brick:timeseries [ brick:hasTimeseriesId "821db552-4d38-35fc-80c8-ae85fb8fae7d" ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:SPRL.CHW.BCHWR,
+        bldg:SPRL.CHW.BCHWS,
+        bldg:SPRL.CHW.Building_Chilled_Water_Return_Temp,
+        bldg:SPRL.CHW.Building_Chilled_Water_Supply_Temp,
+        bldg:SPRL.CHW.ECONOMIZER .
+

@@ -1,0 +1,16 @@
+@prefix bldg: <http://buildsys.org/ontologies/CURR#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:CURR a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value "47016" ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:CURR.CHW.SUPTEMP .
+
+bldg:CURR.CHW.SUPTEMP a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "CURR.CHW.SUPTEMP" ;
+    brick:timeseries [ brick:hasTimeseriesId "cfd7189f-fbe6-3c5b-94a7-7ed8030e1f6c" ] .
+

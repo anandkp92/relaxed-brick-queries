@@ -1,0 +1,66 @@
+@prefix bldg: <http://buildsys.org/ontologies/HUNT#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:HUNT a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 92555 ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:HUNT.CHW.Building_Chilled_Water_Return_Temp,
+        bldg:HUNT.CHW.Building_Chilled_Water_Supply_Temp,
+        bldg:HUNT.CHW.Building_Chilled_Water_Supply_Temp_Sp,
+        bldg:HUNT.CHW.ECONOMIZER,
+        bldg:HUNT.CHW.ENABLE,
+        bldg:HUNT.CHW.LOOP_DP,
+        bldg:HUNT.CHW.Loop_Chilled_Water_Flow,
+        bldg:HUNT.CHW.Loop_Chilled_Water_Return_Temp,
+        bldg:HUNT.CHW.Loop_Chilled_Water_Supply_Temp,
+        bldg:HUNT.CHW.Outside_Air_Temp,
+        bldg:HUNT.CHW.PUMPENABLE .
+
+bldg:HUNT.CHW.Building_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "HUNT.CHW.Building Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "e9f01c83-8fae-33f1-a538-e9c258e3e5eb" ] .
+
+bldg:HUNT.CHW.Building_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "HUNT.CHW.Building Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "7b23832b-ce10-3b0a-93a5-a090247eb77d" ] .
+
+bldg:HUNT.CHW.Building_Chilled_Water_Supply_Temp_Sp a brick:Chilled_Water_Supply_Temperature_Setpoint ;
+    rdfs:label "HUNT.CHW.Building Chilled Water Supply Temp Sp" ;
+    brick:timeseries [ brick:hasTimeseriesId "42180bf2-7cfb-3345-961d-0d2abf6f87a3" ] .
+
+bldg:HUNT.CHW.ECONOMIZER a brick:Damper_Position_Command ;
+    rdfs:label "HUNT.CHW.ECONOMIZER" ;
+    brick:timeseries [ brick:hasTimeseriesId "688bfbfc-4bea-3578-85e8-7b65178f44de" ] .
+
+bldg:HUNT.CHW.ENABLE a brick:Enable_Command ;
+    rdfs:label "HUNT.CHW.ENABLE" ;
+    brick:timeseries [ brick:hasTimeseriesId "56982198-4dcf-3663-a6e2-163d280e2ab4" ] .
+
+bldg:HUNT.CHW.LOOP_DP a brick:Chilled_Water_Differential_Pressure_Sensor ;
+    rdfs:label "HUNT.CHW.LOOP DP" ;
+    brick:timeseries [ brick:hasTimeseriesId "1019cf97-81ff-3692-8a7f-0c49d7286108" ] .
+
+bldg:HUNT.CHW.Loop_Chilled_Water_Flow a brick:Chilled_Water_Flow_Sensor ;
+    rdfs:label "HUNT.CHW.Loop Chilled Water Flow" ;
+    brick:timeseries [ brick:hasTimeseriesId "98536f6b-51d8-374f-8619-39fdfc46e22e" ] .
+
+bldg:HUNT.CHW.Loop_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "HUNT.CHW.Loop Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "5e4daa0f-c89a-3662-bd35-d9d45a1a18c3" ] .
+
+bldg:HUNT.CHW.Loop_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "HUNT.CHW.Loop Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "8f7bbfa6-8949-3cc6-a98f-6f39aca76f0d" ] .
+
+bldg:HUNT.CHW.Outside_Air_Temp a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "HUNT.CHW.Outside Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "ccf3ba84-bc7c-3a15-a6f4-1fb1cf9c05dc" ] .
+
+bldg:HUNT.CHW.PUMPENABLE a brick:Pump_Command ;
+    rdfs:label "HUNT.CHW.PUMPENABLE" ;
+    brick:timeseries [ brick:hasTimeseriesId "5757c040-0d0a-361b-8c30-de2e0ba8e618" ] .
+

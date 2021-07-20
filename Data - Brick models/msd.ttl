@@ -1,0 +1,22 @@
+@prefix bldg: <http://buildsys.org/ontologies/MSD#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:MSD a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 9105 ] .
+
+bldg:MULTI a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:MSD.AHU.MULTI.Cooling_Valve_Output,
+        bldg:MSD.AHU.MULTI.Heating_Valve_Output .
+
+bldg:MSD.AHU.MULTI.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "MSD.AHU.MULTI.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "a8325495-ae94-37fc-b6ab-b7852f57a79a" ] .
+
+bldg:MSD.AHU.MULTI.Heating_Valve_Output a brick:Command ;
+    rdfs:label "MSD.AHU.MULTI.Heating Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "af8286b7-50ba-3878-949a-4f92c2f85f5d" ] .
+

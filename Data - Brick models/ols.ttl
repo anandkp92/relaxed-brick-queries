@@ -1,0 +1,232 @@
+@prefix bldg: <http://buildsys.org/ontologies/OLS#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:AHU_SF01 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:OLS.AHU.AHU_SF01.Cooling_Valve_Output,
+        bldg:OLS.AHU.AHU_SF01.Heating_Valve_Output,
+        bldg:OLS.AHU.AHU_SF01.Mixed_Air_Temp,
+        bldg:OLS.AHU.AHU_SF01.Mode,
+        bldg:OLS.AHU.AHU_SF01.Outside_Air_Temp_Virtual,
+        bldg:OLS.AHU.AHU_SF01.Supply_Air_Pressure,
+        bldg:OLS.AHU.AHU_SF01.Supply_Air_Temp,
+        bldg:OLS.AHU.AHU_SF01.Supply_Air_Temp_Setpoint ;
+    brick:isFedBy bldg:chiller .
+
+bldg:AHU_SF02 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:OLS.AHU.AHU_SF02.CCV,
+        bldg:OLS.AHU.AHU_SF02.Cooling_Valve_Output,
+        bldg:OLS.AHU.AHU_SF02.Heating_Valve_Output,
+        bldg:OLS.AHU.AHU_SF02.Mixed_Air_Temp,
+        bldg:OLS.AHU.AHU_SF02.Mode,
+        bldg:OLS.AHU.AHU_SF02.Outside_Air_Temp_Virtual,
+        bldg:OLS.AHU.AHU_SF02.Supply_Air_Pressure,
+        bldg:OLS.AHU.AHU_SF02.Supply_Air_Temp,
+        bldg:OLS.AHU.AHU_SF02.Supply_Air_Temp_Setpoint ;
+    brick:isFedBy bldg:chiller .
+
+bldg:AHU_SF1_2 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:OLS.AHU.AHU_SF1_2.Return_Air_Temp ;
+    brick:isFedBy bldg:chiller .
+
+bldg:OLS a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 53229 ] .
+
+bldg:Olson_ChilledWater_Demand_kBtu a brick:Electric_Meter ;
+    rdfs:label "Olson_ChilledWater_Demand_kBtu" ;
+    brick:isPointOf bldg:chiller ;
+    brick:timeseries [ brick:hasTimeseriesId "8a5881d5-b4a9-32da-a4cc-e8239b51590c" ] .
+
+bldg:Olson_Electricity_Demand_kBtu a brick:Building_Electric_Meter ;
+    rdfs:label "Olson_Electricity_Demand_kBtu" ;
+    brick:timeseries [ brick:hasTimeseriesId "7f998cc3-20f9-3ede-b559-34c421d21ff8" ] .
+
+bldg:OLS.AHU.AHU_SF01.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "OLS.AHU.AHU_SF01.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "fd669b96-7f3a-321e-8006-bb845aa8ab68" ] .
+
+bldg:OLS.AHU.AHU_SF01.Heating_Valve_Output a brick:Command ;
+    rdfs:label "OLS.AHU.AHU_SF01.Heating Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "0cb207a2-a8f4-38fc-8254-992ce5ab396b" ] .
+
+bldg:OLS.AHU.AHU_SF01.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF01.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "cb0138ce-87ec-3a2a-93fd-116dc7a2334e" ] .
+
+bldg:OLS.AHU.AHU_SF01.Mode a brick:Mode ;
+    rdfs:label "OLS.AHU.AHU_SF01.Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "85c0332d-36e1-35e2-8d52-a74adf7e81ee" ] .
+
+bldg:OLS.AHU.AHU_SF01.Outside_Air_Temp_Virtual a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF01.Outside Air Temp Virtual" ;
+    brick:timeseries [ brick:hasTimeseriesId "6f8b4077-ca2e-39ce-b3c7-1483c13e0992" ] .
+
+bldg:OLS.AHU.AHU_SF01.Supply_Air_Pressure a brick:Supply_Air_Static_Pressure_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF01.Supply Air Pressure" ;
+    brick:timeseries [ brick:hasTimeseriesId "b3f513bb-c9ec-3863-b5cc-29de308754d5" ] .
+
+bldg:OLS.AHU.AHU_SF01.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF01.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "a2871537-c7c5-35bd-9fd3-b21d5919720a" ] .
+
+bldg:OLS.AHU.AHU_SF01.Supply_Air_Temp_Setpoint a brick:Supply_Air_Temperature_Setpoint ;
+    rdfs:label "OLS.AHU.AHU_SF01.Supply Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "0b575e31-4910-327d-990a-8d9b88d828e6" ] .
+
+bldg:OLS.AHU.AHU_SF02.CCV a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "OLS.AHU.AHU_SF02.CCV" ;
+    brick:timeseries [ brick:hasTimeseriesId "87bfb24a-dfe0-3723-9ad1-9fa96960a335" ] .
+
+bldg:OLS.AHU.AHU_SF02.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "OLS.AHU.AHU_SF02.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "f80177e9-bd18-3aed-a621-e80b11771bb8" ] .
+
+bldg:OLS.AHU.AHU_SF02.Heating_Valve_Output a brick:Command ;
+    rdfs:label "OLS.AHU.AHU_SF02.Heating Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "47e51336-1890-3290-bd13-359411846457" ] .
+
+bldg:OLS.AHU.AHU_SF02.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF02.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "9accd084-c4d6-35b3-a596-1e62c35fe742" ] .
+
+bldg:OLS.AHU.AHU_SF02.Mode a brick:Mode ;
+    rdfs:label "OLS.AHU.AHU_SF02.Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "39f65f71-9fe9-3694-b7d1-e79511b4705c" ] .
+
+bldg:OLS.AHU.AHU_SF02.Outside_Air_Temp_Virtual a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF02.Outside Air Temp Virtual" ;
+    brick:timeseries [ brick:hasTimeseriesId "4f6175f5-2a34-3e89-82c3-8985a01410f0" ] .
+
+bldg:OLS.AHU.AHU_SF02.Supply_Air_Pressure a brick:Supply_Air_Static_Pressure_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF02.Supply Air Pressure" ;
+    brick:timeseries [ brick:hasTimeseriesId "a7c1e2e7-eaa7-3598-a372-67f2f9fbd9e6" ] .
+
+bldg:OLS.AHU.AHU_SF02.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF02.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "2c422f67-e2fb-39c4-a401-c1c1dc629547" ] .
+
+bldg:OLS.AHU.AHU_SF02.Supply_Air_Temp_Setpoint a brick:Supply_Air_Temperature_Setpoint ;
+    rdfs:label "OLS.AHU.AHU_SF02.Supply Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "93771c40-d8e0-35d7-9c40-02014d79d972" ] .
+
+bldg:OLS.AHU.AHU_SF1_2.Return_Air_Temp a brick:Return_Air_Temperature_Sensor ;
+    rdfs:label "OLS.AHU.AHU_SF1_2.Return Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "cb61e1c3-d3f7-3e97-a1d3-54afce7c3a33" ] .
+
+bldg:OLS.CHW.Building_Chilled_Water_Flow a brick:Chilled_Water_Flow_Sensor ;
+    rdfs:label "OLS.CHW.Building Chilled Water Flow" ;
+    brick:timeseries [ brick:hasTimeseriesId "230d0e59-1eb6-3c4e-97eb-993bc8631547" ] .
+
+bldg:OLS.CHW.Building_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "OLS.CHW.Building Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "115a7b0b-ec48-3e03-9215-9b763dc14e08" ] .
+
+bldg:OLS.CHW.Building_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "OLS.CHW.Building Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "b719b732-a5a3-31db-a62a-62d9817486f9" ] .
+
+bldg:OLS.CHW.CHWP1_FREQ_OUTPUT a brick:Output_Frequency_Sensor ;
+    rdfs:label "OLS.CHW.CHWP1_FREQ OUTPUT" ;
+    brick:timeseries [ brick:hasTimeseriesId "23f5b58b-e548-33f8-a213-0545df482d52" ] .
+
+bldg:OLS.CHW.CHWP1_PCT_OUTPUT a brick:Cooling_Request_Percent_Setpoint ;
+    rdfs:label "OLS.CHW.CHWP1_PCT OUTPUT" ;
+    brick:timeseries [ brick:hasTimeseriesId "b2dd59f5-7a46-3650-b600-01e1e0d80fd9" ] .
+
+bldg:OLS.CHW.CHWP1_POWER a brick:Power_Sensor ;
+    rdfs:label "OLS.CHW.CHWP1_POWER" ;
+    brick:timeseries [ brick:hasTimeseriesId "2839655c-9d67-3789-83a4-1e866848fe60" ] .
+
+bldg:OLS.CHW.CHWP1_SPEED a brick:Chilled_Water_Pump_VFD_Speed ;
+    rdfs:label "OLS.CHW.CHWP1_SPEED" ;
+    brick:timeseries [ brick:hasTimeseriesId "af867b54-dff0-3d01-bd46-edd8f2d4db1d" ] .
+
+bldg:OLS.CHW.CHWP2_FREQ_OUTPUT a brick:Output_Frequency_Sensor ;
+    rdfs:label "OLS.CHW.CHWP2_FREQ OUTPUT" ;
+    brick:timeseries [ brick:hasTimeseriesId "cf95ec52-ff29-36ba-9a96-2ca891a0dec3" ] .
+
+bldg:OLS.CHW.CHWP2_PCT_OUTPUT a brick:Cooling_Request_Percent_Setpoint ;
+    rdfs:label "OLS.CHW.CHWP2_PCT OUTPUT" ;
+    brick:timeseries [ brick:hasTimeseriesId "35cd0616-a53e-3f00-a293-321938bf457e" ] .
+
+bldg:OLS.CHW.CHWP2_POWER a brick:Power_Sensor ;
+    rdfs:label "OLS.CHW.CHWP2_POWER" ;
+    brick:timeseries [ brick:hasTimeseriesId "98b10844-9aaa-38da-9521-3b4b07576334" ] .
+
+bldg:OLS.CHW.CHWP2_SPEED a brick:Chilled_Water_Pump_VFD_Speed ;
+    rdfs:label "OLS.CHW.CHWP2_SPEED" ;
+    brick:timeseries [ brick:hasTimeseriesId "5858163c-ab4f-3bb0-a91c-8fae1ffb456b" ] .
+
+bldg:OLS.CHW.CHWP3_FREQ_OUTPUT a brick:Output_Frequency_Sensor ;
+    rdfs:label "OLS.CHW.CHWP3_FREQ OUTPUT" ;
+    brick:timeseries [ brick:hasTimeseriesId "badee8f3-efa9-384e-b76a-bc463bdc5e58" ] .
+
+bldg:OLS.CHW.CHWP3_PCT_OUTPUT a brick:Cooling_Request_Percent_Setpoint ;
+    rdfs:label "OLS.CHW.CHWP3_PCT OUTPUT" ;
+    brick:timeseries [ brick:hasTimeseriesId "b76295d4-aa71-3e03-b9fc-ab0579ce9ac4" ] .
+
+bldg:OLS.CHW.CHWP3_POWER a brick:Power_Sensor ;
+    rdfs:label "OLS.CHW.CHWP3_POWER" ;
+    brick:timeseries [ brick:hasTimeseriesId "a452971a-a82c-3c89-9d54-199a6e9cacc4" ] .
+
+bldg:OLS.CHW.CHWP3_SPEED a brick:Chilled_Water_Pump_VFD_Speed ;
+    rdfs:label "OLS.CHW.CHWP3_SPEED" ;
+    brick:timeseries [ brick:hasTimeseriesId "52386b72-3528-3689-b223-389e2fd62cf9" ] .
+
+bldg:OLS.CHW.ECONOMIZER a brick:Damper_Position_Command ;
+    rdfs:label "OLS.CHW.ECONOMIZER" ;
+    brick:timeseries [ brick:hasTimeseriesId "737afb4f-f5d4-31bb-9c61-811019a33847" ] .
+
+bldg:OLS.CHW.Enable a brick:Enable_Command ;
+    rdfs:label "OLS.CHW.Enable" ;
+    brick:timeseries [ brick:hasTimeseriesId "9c054678-08e6-36ec-ade5-b2744149dba0" ] .
+
+bldg:OLS.CHW.Outside_Air_Temp a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "OLS.CHW.Outside Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "59f5d3ba-70b2-355b-b4f1-6ec5815a61eb" ] .
+
+bldg:OLS.CHW.Building_Chilled_Water_Delta_Temp a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "OLS.CHW.Building Chilled Water Flow" ;
+    brick:timeseries [ brick:hasTimeseriesId "4ed084cb-1758-3ddf-94c2-43d9a80fb514" ] .
+
+<http://buildsys.org/ontologies/OLS#OLS.CHW.Pump1_Start/Stop> a brick:Start_Stop_Command ;
+    rdfs:label "OLS.CHW.Pump1_Start/Stop" ;
+    brick:timeseries [ brick:hasTimeseriesId "63b1c2fb-ed9e-3511-a67b-9849a8f1af88" ] .
+
+<http://buildsys.org/ontologies/OLS#OLS.CHW.Pump2_Start/Stop> a brick:Start_Stop_Command ;
+    rdfs:label "OLS.CHW.Pump2_Start/Stop" ;
+    brick:timeseries [ brick:hasTimeseriesId "0236b9d1-8727-3fa0-be74-7b3e5033fb0a" ] .
+
+<http://buildsys.org/ontologies/OLS#OLS.CHW.Pump3_Start/Stop> a brick:Start_Stop_Command ;
+    rdfs:label "OLS.CHW.Pump3_Start/Stop" ;
+    brick:timeseries [ brick:hasTimeseriesId "61adb564-83a0-39bf-9879-6a6c1206da8b" ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:OLS.CHW.Building_Chilled_Water_Flow,
+        bldg:OLS.CHW.Building_Chilled_Water_Return_Temp,
+        bldg:OLS.CHW.Building_Chilled_Water_Supply_Temp,
+        bldg:OLS.CHW.Building_Chilled_Water_Delta_Temp,
+        bldg:OLS.CHW.CHWP1_FREQ_OUTPUT,
+        bldg:OLS.CHW.CHWP1_PCT_OUTPUT,
+        bldg:OLS.CHW.CHWP1_POWER,
+        bldg:OLS.CHW.CHWP1_SPEED,
+        bldg:OLS.CHW.CHWP2_FREQ_OUTPUT,
+        bldg:OLS.CHW.CHWP2_PCT_OUTPUT,
+        bldg:OLS.CHW.CHWP2_POWER,
+        bldg:OLS.CHW.CHWP2_SPEED,
+        bldg:OLS.CHW.CHWP3_FREQ_OUTPUT,
+        bldg:OLS.CHW.CHWP3_PCT_OUTPUT,
+        bldg:OLS.CHW.CHWP3_POWER,
+        bldg:OLS.CHW.CHWP3_SPEED,
+        bldg:OLS.CHW.ECONOMIZER,
+        bldg:OLS.CHW.Enable,
+        bldg:OLS.CHW.Outside_Air_Temp,
+        <http://buildsys.org/ontologies/OLS#OLS.CHW.Pump1_Start/Stop>,
+        <http://buildsys.org/ontologies/OLS#OLS.CHW.Pump2_Start/Stop>,
+        <http://buildsys.org/ontologies/OLS#OLS.CHW.Pump3_Start/Stop> .
+

@@ -1,0 +1,183 @@
+@prefix bldg: <http://buildsys.org/ontologies/MSC#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:AHU05 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:MSC.AHU.AHU05.Cooling_Valve_Output,
+        bldg:MSC.AHU.AHU05.Heating_Valve_Output,
+        bldg:MSC.AHU.AHU05.Mixed_Air_Temp,
+        bldg:MSC.AHU.AHU05.Mode,
+        bldg:MSC.AHU.AHU05.Outside_Air_Temp,
+        bldg:MSC.AHU.AHU05.Outside_Air_Temp_Virtual,
+        bldg:MSC.AHU.AHU05.Return_Air_Temp,
+        bldg:MSC.AHU.AHU05.Supply_Air_Temp,
+        bldg:MSC.AHU.AHU05.Supply_Air_Temp_Setpoint ;
+    brick:isFedBy bldg:chiller .
+
+bldg:AHU06 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:MSC.AHU.AHU06.Cooling_Valve_Output,
+        bldg:MSC.AHU.AHU06.Heating_Valve_Output,
+        bldg:MSC.AHU.AHU06.Mixed_Air_Temp,
+        bldg:MSC.AHU.AHU06.Mode,
+        bldg:MSC.AHU.AHU06.Outside_Air_Temp_Virtual,
+        bldg:MSC.AHU.AHU06.Return_Air_Temp,
+        bldg:MSC.AHU.AHU06.Supply_Air_Temp,
+        bldg:MSC.AHU.AHU06.Supply_Air_Temp_Setpoint ;
+    brick:isFedBy bldg:chiller .
+
+bldg:AHU07 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:MSC.AHU.AHU07.Cooling_Valve_Output,
+        bldg:MSC.AHU.AHU07.Heating_Valve_Output,
+        bldg:MSC.AHU.AHU07.Mode,
+        bldg:MSC.AHU.AHU07.Outside_Air_Temp_Virtual,
+        bldg:MSC.AHU.AHU07.Return_Air_Temp,
+        bldg:MSC.AHU.AHU07.Supply_Air_Temp,
+        bldg:MSC.AHU.AHU07.Supply_Air_Temp_Setpoint ;
+    brick:isFedBy bldg:chiller .
+
+bldg:MSC a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value 16618 ] .
+
+bldg:MSC.AHU.AHU05.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "MSC.AHU.AHU05.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "1d072ba6-93c6-3a8f-8b29-148cf8fb590c" ] .
+
+bldg:MSC.AHU.AHU05.Heating_Valve_Output a brick:Command ;
+    rdfs:label "MSC.AHU.AHU05.Heating Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "673f86f7-863e-384b-8feb-edaa274c785a" ] .
+
+bldg:MSC.AHU.AHU05.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU05.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "28ecfeae-16d1-3cbf-b923-eb3e8676017f" ] .
+
+bldg:MSC.AHU.AHU05.Mode a brick:Mode ;
+    rdfs:label "MSC.AHU.AHU05.Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "b3e31e5f-a4f7-3a29-98b9-34d25dd00d6e" ] .
+
+bldg:MSC.AHU.AHU05.Outside_Air_Temp a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU05.Outside Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "b909188c-584a-3a48-b6ab-abb33f8b269e" ] .
+
+bldg:MSC.AHU.AHU05.Outside_Air_Temp_Virtual a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU05.Outside Air Temp Virtual" ;
+    brick:timeseries [ brick:hasTimeseriesId "e1ab92e7-8a36-36f0-b548-a3153fa0fac0" ] .
+
+bldg:MSC.AHU.AHU05.Return_Air_Temp a brick:Return_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU05.Return Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "027e1914-e4fe-3595-b28a-d39cd7404266" ] .
+
+bldg:MSC.AHU.AHU05.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU05.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "b89ce9a5-2a02-3836-8efb-00d66feb1e86" ] .
+
+bldg:MSC.AHU.AHU05.Supply_Air_Temp_Setpoint a brick:Supply_Air_Temperature_Setpoint ;
+    rdfs:label "MSC.AHU.AHU05.Supply Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "7fdc3350-c61e-311b-b40b-58ffca71e959" ] .
+
+bldg:MSC.AHU.AHU06.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "MSC.AHU.AHU06.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "dadb1e73-857c-3e05-ad8d-d1f9075756d5" ] .
+
+bldg:MSC.AHU.AHU06.Heating_Valve_Output a brick:Command ;
+    rdfs:label "MSC.AHU.AHU06.Heating Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "c5c7f978-e4ae-34f5-8502-ebae91f0b399" ] .
+
+bldg:MSC.AHU.AHU06.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU06.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "8827d4f4-2498-3ab9-aabd-8c40b50bed3e" ] .
+
+bldg:MSC.AHU.AHU06.Mode a brick:Mode ;
+    rdfs:label "MSC.AHU.AHU06.Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "daa1baf5-31aa-3a57-82b2-092c6c786c25" ] .
+
+bldg:MSC.AHU.AHU06.Outside_Air_Temp_Virtual a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU06.Outside Air Temp Virtual" ;
+    brick:timeseries [ brick:hasTimeseriesId "c6692eca-a29b-3831-9b2d-89d556bfb452" ] .
+
+bldg:MSC.AHU.AHU06.Return_Air_Temp a brick:Return_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU06.Return Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "516a413c-f7ac-32b3-bf66-3b9e7f74b113" ] .
+
+bldg:MSC.AHU.AHU06.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU06.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "08267052-7a27-35b3-bb06-344a897b55e4" ] .
+
+bldg:MSC.AHU.AHU06.Supply_Air_Temp_Setpoint a brick:Supply_Air_Temperature_Setpoint ;
+    rdfs:label "MSC.AHU.AHU06.Supply Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "5c621bb0-e067-39d2-8f3c-cbae857fbf99" ] .
+
+bldg:MSC.AHU.AHU07.Cooling_Valve_Output a brick:Cooling_Command,
+        brick:Valve_Command ;
+    rdfs:label "MSC.AHU.AHU07.Cooling Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "980ee9c1-7aa0-309c-b5c8-ee97f57fa1a5" ] .
+
+bldg:MSC.AHU.AHU07.Heating_Valve_Output a brick:Command ;
+    rdfs:label "MSC.AHU.AHU07.Heating Valve Output" ;
+    brick:timeseries [ brick:hasTimeseriesId "77e91827-8201-39c9-a3d4-1ecb39a639eb" ] .
+
+bldg:MSC.AHU.AHU07.Mode a brick:Mode ;
+    rdfs:label "MSC.AHU.AHU07.Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "eb9ededb-0160-3e6c-b750-d4650813779e" ] .
+
+bldg:MSC.AHU.AHU07.Outside_Air_Temp_Virtual a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU07.Outside Air Temp Virtual" ;
+    brick:timeseries [ brick:hasTimeseriesId "38ebb5c4-fcb7-3176-bb92-ea6a98f5e319" ] .
+
+bldg:MSC.AHU.AHU07.Return_Air_Temp a brick:Return_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU07.Return Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "eed08e8a-edea-3f1a-ace0-32e27e0c0d5d" ] .
+
+bldg:MSC.AHU.AHU07.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "MSC.AHU.AHU07.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "c4c03635-48ad-3631-84ec-5cbf9b0a2d89" ] .
+
+bldg:MSC.AHU.AHU07.Supply_Air_Temp_Setpoint a brick:Supply_Air_Temperature_Setpoint ;
+    rdfs:label "MSC.AHU.AHU07.Supply Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "ebe7e67e-fc1d-3fa5-bf7d-232028e903e9" ] .
+
+bldg:MSC.CHW.Building_Chilled_Water_Flow a brick:Chilled_Water_Flow_Sensor ;
+    rdfs:label "MSC.CHW.Building Chilled Water Flow" ;
+    brick:timeseries [ brick:hasTimeseriesId "0caa409c-f994-3193-a29e-2b16baf754cb" ] .
+
+bldg:MSC.CHW.Building_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "MSC.CHW.Building Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "d995e072-13d9-38ce-925a-42f54444ff98" ] .
+
+bldg:MSC.CHW.Building_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "MSC.CHW.Building Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "3425e8cb-8768-39ae-8a5b-10014cc4f5d4" ] .
+
+bldg:MSC.CHW.Building_Chilled_Water_Supply_Temp_Setpoint a brick:Chilled_Water_Supply_Temperature_Setpoint ;
+    rdfs:label "MSC.CHW.Building Chilled Water Supply Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "81022323-608d-337f-9e9c-40dd1c08c86f" ] .
+
+bldg:MSC.CHW.ECONOMIZER a brick:Damper_Position_Command ;
+    rdfs:label "MSC.CHW.ECONOMIZER" ;
+    brick:timeseries [ brick:hasTimeseriesId "d908cb9f-ff5b-350f-a824-bd800243699e" ] .
+
+bldg:MSC.CHW.Loop_Chilled_Water_Return_Temp a brick:Chilled_Water_Return_Temperature_Sensor ;
+    rdfs:label "MSC.CHW.Loop Chilled Water Return Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "d08745c8-7695-3795-aab3-729545aa2db8" ] .
+
+bldg:MSC.CHW.Loop_Chilled_Water_Supply_Temp a brick:Chilled_Water_Supply_Temperature_Sensor ;
+    rdfs:label "MSC.CHW.Loop Chilled Water Supply Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "1f47ae11-0a48-3584-9f7b-9501c76ab104" ] .
+
+bldg:MSC.CHW.Outside_Air_Temp a brick:Outside_Air_Temperature_Sensor ;
+    rdfs:label "MSC.CHW.Outside Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "9e06aad7-ee48-31c0-9f1a-29f9b3028298" ] .
+
+bldg:chiller a brick:Chiller ;
+    brick:hasPoint bldg:MSC.CHW.Building_Chilled_Water_Flow,
+        bldg:MSC.CHW.Building_Chilled_Water_Return_Temp,
+        bldg:MSC.CHW.Building_Chilled_Water_Supply_Temp,
+        bldg:MSC.CHW.Building_Chilled_Water_Supply_Temp_Setpoint,
+        bldg:MSC.CHW.ECONOMIZER,
+        bldg:MSC.CHW.Loop_Chilled_Water_Return_Temp,
+        bldg:MSC.CHW.Loop_Chilled_Water_Supply_Temp,
+        bldg:MSC.CHW.Outside_Air_Temp .
+

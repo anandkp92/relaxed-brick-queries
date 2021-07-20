@@ -1,0 +1,121 @@
+@prefix bldg: <http://buildsys.org/ontologies/HICK#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+bldg:AC01 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:HICK.AHU.AC01.Mixed_Air_Temp,
+        bldg:HICK.AHU.AC01.Supply_Air_Temp .
+
+bldg:AC03 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:HICK.AHU.AC03.Day_Night_Mode,
+        bldg:HICK.AHU.AC03.Heat_Cool_Mode,
+        bldg:HICK.AHU.AC03.Zone_Air_Temp,
+        bldg:HICK.AHU.AC03.Zone_Air_Temp_Setpoint .
+
+bldg:AC04 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:HICK.AHU.AC04.Day_Night_Mode,
+        bldg:HICK.AHU.AC04.Heat_Cool_Mode,
+        bldg:HICK.AHU.AC04.Zone_Air_Temp,
+        bldg:HICK.AHU.AC04.Zone_Air_Temp_Setpoint .
+
+bldg:AC05 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:HICK.AHU.AC05.Day_Night_Mode,
+        bldg:HICK.AHU.AC05.Heat_Cool_Mode,
+        bldg:HICK.AHU.AC05.Zone_Air_Temp,
+        bldg:HICK.AHU.AC05.Zone_Air_Temp_Setpoint .
+
+bldg:AC06 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:HICK.AHU.AC06.Day_Night_Mode,
+        bldg:HICK.AHU.AC06.Heat_Cool_Mode,
+        bldg:HICK.AHU.AC06.Zone_Air_Temp,
+        bldg:HICK.AHU.AC06.Zone_Air_Temp_Setpoint .
+
+bldg:AH02 a brick:Air_Handler_Unit ;
+    brick:hasPoint bldg:HICK.AHU.AH02.Mixed_Air_Temp,
+        bldg:HICK.AHU.AH02.Supply_Air_Temp .
+
+bldg:HICK a brick:Building ;
+    brick:area [ brick:hasUnits unit:FT_2 ;
+            brick:value "117804" ] .
+
+bldg:HICK.AHU.AC01.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AC01.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "483f3ef8-98f3-311d-a299-9c13ecab62a9" ] .
+
+bldg:HICK.AHU.AC01.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AC01.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "7d2f8bd3-dd97-3a07-be68-197fa7e2dc30" ] .
+
+bldg:HICK.AHU.AC03.Day_Night_Mode a brick:Mode ;
+    rdfs:label "HICK.AHU.AC03.Day Night Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "bca19d8f-bee3-3b75-adff-86b816e76f04" ] .
+
+bldg:HICK.AHU.AC03.Heat_Cool_Mode a brick:Mode_Command ;
+    rdfs:label "HICK.AHU.AC03.Heat Cool Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "53e98707-a87a-3a36-8194-a03a88132b56" ] .
+
+bldg:HICK.AHU.AC03.Zone_Air_Temp a brick:Zone_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AC03.Zone Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "e207ded4-2f6c-3b78-92d4-d31719e232ce" ] .
+
+bldg:HICK.AHU.AC03.Zone_Air_Temp_Setpoint a brick:Zone_Air_Temperature_Setpoint ;
+    rdfs:label "HICK.AHU.AC03.Zone Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "c71faf97-32f0-35df-8872-c41fa2aa0e60" ] .
+
+bldg:HICK.AHU.AC04.Day_Night_Mode a brick:Mode ;
+    rdfs:label "HICK.AHU.AC04.Day Night Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "393d9104-b712-32ca-a55f-6491d92f98d6" ] .
+
+bldg:HICK.AHU.AC04.Heat_Cool_Mode a brick:Mode_Command ;
+    rdfs:label "HICK.AHU.AC04.Heat Cool Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "450ada1c-acb5-3d74-bac6-ae0e59e3d666" ] .
+
+bldg:HICK.AHU.AC04.Zone_Air_Temp a brick:Zone_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AC04.Zone Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "088ba16b-5705-3ea9-96fe-41cfce0d621f" ] .
+
+bldg:HICK.AHU.AC04.Zone_Air_Temp_Setpoint a brick:Zone_Air_Temperature_Setpoint ;
+    rdfs:label "HICK.AHU.AC04.Zone Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "e51b6403-2863-3f36-9764-e4df36b635be" ] .
+
+bldg:HICK.AHU.AC05.Day_Night_Mode a brick:Mode ;
+    rdfs:label "HICK.AHU.AC05.Day Night Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "996c38e9-ff35-34e7-bff8-007c321b9ee2" ] .
+
+bldg:HICK.AHU.AC05.Heat_Cool_Mode a brick:Mode_Command ;
+    rdfs:label "HICK.AHU.AC05.Heat Cool Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "196e08e7-307f-314a-bf16-80c2d547863c" ] .
+
+bldg:HICK.AHU.AC05.Zone_Air_Temp a brick:Zone_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AC05.Zone Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "bf47b00a-05bc-3ad9-a3fb-7343b3894a57" ] .
+
+bldg:HICK.AHU.AC05.Zone_Air_Temp_Setpoint a brick:Zone_Air_Temperature_Setpoint ;
+    rdfs:label "HICK.AHU.AC05.Zone Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "7a41bc14-512b-3905-8ac2-c7eabfa2ebe2" ] .
+
+bldg:HICK.AHU.AC06.Day_Night_Mode a brick:Mode ;
+    rdfs:label "HICK.AHU.AC06.Day Night Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "5ed156da-662f-387f-947b-00ba39a84e55" ] .
+
+bldg:HICK.AHU.AC06.Heat_Cool_Mode a brick:Mode_Command ;
+    rdfs:label "HICK.AHU.AC06.Heat Cool Mode" ;
+    brick:timeseries [ brick:hasTimeseriesId "ab87e8bd-10cc-32d6-bdb1-869ccc57638b" ] .
+
+bldg:HICK.AHU.AC06.Zone_Air_Temp a brick:Zone_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AC06.Zone Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "85725615-d8a7-3ef1-b455-979c62db864f" ] .
+
+bldg:HICK.AHU.AC06.Zone_Air_Temp_Setpoint a brick:Zone_Air_Temperature_Setpoint ;
+    rdfs:label "HICK.AHU.AC06.Zone Air Temp Setpoint" ;
+    brick:timeseries [ brick:hasTimeseriesId "72b60d45-788d-3135-a90e-0da5d15f3f8b" ] .
+
+bldg:HICK.AHU.AH02.Mixed_Air_Temp a brick:Mixed_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AH02.Mixed Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "c090525d-0b0c-3263-947a-4a77bd8d284c" ] .
+
+bldg:HICK.AHU.AH02.Supply_Air_Temp a brick:Supply_Air_Temperature_Sensor ;
+    rdfs:label "HICK.AHU.AH02.Supply Air Temp" ;
+    brick:timeseries [ brick:hasTimeseriesId "1aef1c67-2c32-3263-bad0-03d9ec20096c" ] .
+
