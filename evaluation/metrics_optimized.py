@@ -3,26 +3,29 @@ from brickschema.namespaces import BRICK, RDFS, OWL, TAG, RDF
 from rdflib import URIRef
 import networkx
 from utils import *
-from relaxation_graphs.full_relaxation_graph import *
+from relaxation_graphs.traverse_nodes_with_no_results import *
 import datetime
 
 brick_graph = brickschema.Graph(load_brick=True)
 
-def get_evaluation_metrics(file, query):
+def get_optimized_evaluation_metrics(file, query):
     g = brickschema.Graph(load_brick=True)
     g.load_file(file)
     g.expand(profile="owlrl")
     select_statement = query.split("{")[0] + "{\n"
     
     relaxation_start_time = datetime.datetime.now()
-    G = get_relaxed_graph(query=query)
+    G, results = get_optimized_relaxed_graph(query=query, building_model=g)
     relaxation_end_time = datetime.datetime.now()
     
     querying_start_time = datetime.datetime.now()
     nodes_with_data = []
     for uuid, node in G.nodes().data():
         brick_query = generate_brick_query_from_node(node['query'], select_statement=select_statement)
-        res = run_brick_query(building_model=g, query=brick_query)
+        if uuid in results:
+            res = results[uuid]
+        else:
+            res = run_brick_query(building_model=g, query=brick_query)
         if len(res) > 0:
             nodes_with_data.append(uuid)
     querying_end_time = datetime.datetime.now()

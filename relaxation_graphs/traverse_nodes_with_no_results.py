@@ -9,8 +9,9 @@ import uuid
 
 brick_graph = brickschema.Graph(load_brick=True)
 
-def get_relaxed_graph(query):
+def get_optimized_relaxed_graph(query, building_model):
     triples = extract_triples(query)
+    select_statement = query.split("{")[0] + "{\n"
     
     rules = [ApplyRule_UpperClass, apply_rule_variable_relationship, apply_rule_transitive_relationship]
     rule_names = ['upper', 'relationship', 'transitive_relationship']
@@ -22,11 +23,18 @@ def get_relaxed_graph(query):
     origin_uuid = uuid.uuid3(namespace=ns, name=str(sorted(triples)))
     G.add_node(origin_uuid, query=sorted(triples), node_id=num_nodes, level=0)
     num_nodes+=1
-
-    nodes_to_parse = [origin_uuid]
+    results = {}
+    
+    brick_query = generate_brick_query_from_node(triples, select_statement=select_statement)
+    res = run_brick_query(building_model=building_model, query=brick_query)
+    if len(res) == 0:
+        nodes_to_parse = [origin_uuid]
+    else:
+        nodes_to_parse = []
 
     already_parsed_uuids = []
     level = 1
+
     while len(nodes_to_parse) > 0:
         new_nodes_to_parse = []
 
@@ -54,13 +62,20 @@ def get_relaxed_graph(query):
                             node_uuid = uuid.uuid3(namespace=ns, name=str(sorted(triples_copy)))
 
                             if node_uuid not in G.nodes():
+                                brick_query = generate_brick_query_from_node(triples, select_statement=select_statement)
+                                res = run_brick_query(building_model=building_model, query=brick_query)
+                                
                                 G.add_node(node_uuid, query=sorted(triples_copy), node_id=num_nodes, level=level)
                                 G.add_edge(source_uuid, node_uuid, rule=rule_names[r_index], triple=i, source_node_id=source_node_id, destn_node_id=num_nodes)
-                                new_nodes_to_parse.append(node_uuid)
+                                results[node_uuid] = res
                                 num_nodes+=1
+                                
+                                if len(res) == 0:
+                                    new_nodes_to_parse.append(node_uuid)
+                                
 
         nodes_to_parse = new_nodes_to_parse
         print("level {} completed".format(level))
         level+=1
     print("Graph completed")
-    return G
+    return G, results

@@ -22,7 +22,8 @@ def extract_triples(query):
                 elif count == 2:
                     triple.append(i)
                 count+=1
-        triples.append(triple)
+        if triple!= []:
+            triples.append(triple)
     return triples
 
 def get_namespace(x):
