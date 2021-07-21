@@ -9,7 +9,7 @@ import uuid
 
 brick_graph = brickschema.Graph(load_brick=True)
 
-def get_relaxed_graph(query):
+def get_relaxed_graph(query, max_level=-1):
     triples = extract_triples(query)
     
     rules = [ApplyRule_UpperClass, apply_rule_variable_relationship, apply_rule_transitive_relationship]
@@ -28,6 +28,8 @@ def get_relaxed_graph(query):
     already_parsed_uuids = []
     level = 1
     while len(nodes_to_parse) > 0:
+        if max_level >= 0 and level > max_level:
+            return G
         new_nodes_to_parse = []
 
         for source_uuid in nodes_to_parse:
