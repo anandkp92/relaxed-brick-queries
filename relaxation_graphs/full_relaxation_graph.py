@@ -5,97 +5,60 @@ from utils import *
 from rules.relationship_relaxation import *
 from rules.type_relaxation import *
 import networkx
+import uuid
+
 brick_graph = brickschema.Graph(load_brick=True)
 
-
-def create_ordered_list(triples_copy):
-    ordered_list = []
-    for item in triples_copy:
-        for item_i in item:
-            item_new = item_i.split('#')[-1]
-            ordered_list.append(item_new)
-    ordered_list.sort()
-    return ordered_list
-                
-def relax_triples(G, triples, rules, rule_names, level_itr, node_idx, k_node):
-    
-    for r_index in range(len(rules)):
-        rule = rules[r_index]
-    
-        for i in range(len(triples)):
-            triple = triples[i]
-            if rule_names[i] == 'relationship':
-                relaxed_triples = rule(triple, triples=triples)
-            else:
-                relaxed_triples = rule(triple)
-        
-            if len(relaxed_triples) > 0:
-                for relaxed_triple in relaxed_triples:
-                    triples_copy = triples.copy()
-                    triples_copy[i] = relaxed_triple
-                    
-                    #Checking to see if it exists within graph
-                    ordered_list = create_ordered_list(triples_copy)
-                    
-                    if any(G.nodes.data()[node]['ordered_id'] == ordered_list for node in G) == False:
-                        G.add_node(node_idx, query=triples_copy, ordered_id = ordered_list)
-                        G.add_edge(k_node, node_idx, rule=rule_names[r_index], level=level_itr, triple=i)
-                        node_idx+=1
-                        #print('node pass')
-                    else:
-                        #print('node deleted')
-                        pass
-                        
-    return G, node_idx
-
-def relaxtion_graph(query, limit_level):
-    rules = [ApplyRule_LowerClass, ApplyRule_SiblingClass, ApplyRule_UpperClass, apply_rule_variable_relationship,
-             apply_rule_transitive_relationship]
-    rule_names = ['lower', 'sibling', 'upper', 'relationship', 'transitive_relationship']
-    
-    if limit_level == True:
-        limit_num = int(input('Enter desired level of relaxation:- '))
-    else:
-        limit_num = 10000000
-                        
+def get_relaxed_graph(query):
     triples = extract_triples(query)
+    
+    rules = [ApplyRule_UpperClass, apply_rule_variable_relationship, apply_rule_transitive_relationship]
+    rule_names = ['upper', 'relationship', 'transitive_relationship']
 
     G = networkx.Graph()
-    node_idx = 1
-    ordered_list = create_ordered_list(triples)
-    G.add_node(node_idx, query=triples, ordered_id = ordered_list)
-    node_idx+=1
-    G_old = G.copy()
-        
-    # Create First Layer
-    start_node = node_idx
-    level_itr = 1
-    G_new, node_idx = relax_triples(G, triples, rules, rule_names, level_itr, node_idx, k_node=1)
-    print('Level '+ str(level_itr) + ' complete')
-    end_node = node_idx
-    G_new = G.copy()
+    ns = uuid.uuid4()
 
-    while len(G_old) < len(G_new):
-        level_itr += 1
-        for k_node in range(start_node, end_node+1):
-            query = G.nodes.data()[k_node]['query']
-            triples = query.copy()
-            G_old = G_new.copy()
-            G_new, node_idx = relax_triples(G, triples, rules, rule_names, level_itr, node_idx, k_node)
-        print('Level '+ str(level_itr) + 'complete')
-        start_node = end_node+1
-        end_node = node_idx
-        if level_itr > limit_num:
-            break
+    num_nodes = 0
+    origin_uuid = uuid.uuid3(namespace=ns, name=str(sorted(triples)))
+    G.add_node(origin_uuid, query=sorted(triples), node_id=num_nodes)
+    num_nodes+=1
 
-    return G_new
+    nodes_to_parse = [origin_uuid]
 
-def main(query, limit_level=False, export=False):
-    G_relaxed = relaxtion_graph(query, limit_level)
-    print('Relaxed query graph generated')
-    if export == True:
-        # saving graph created above in gexf format, can be visualized using Gephi
-        nx.write_gexf(G_relaxed, "full_relaxed_query.gexf")
-        print('GEXF file generated')
-        
-    return G_relaxed
+    already_parsed_uuids = []
+    level = 1
+    while len(nodes_to_parse) > 0:
+        new_nodes_to_parse = []
+
+        for source_uuid in nodes_to_parse:
+            triples = G.nodes().data()[source_uuid].get('query')
+            source_node_id = G.nodes.data()[source_uuid].get('node_id')
+            already_parsed_uuids.append(source_uuid)
+
+            for r_index in range(len(rules)):
+                rule = rules[r_index]
+
+                for i in range(len(triples)):
+                    triple = sorted(triples)[i]
+                    if rule_names[r_index] == 'relationship':
+                        relaxed_triples = rule(triple, triples=triples)
+                    else:
+                        relaxed_triples = rule(triple)
+
+                    if len(relaxed_triples) > 0:
+                        for relaxed_triple in relaxed_triples:
+                            triples_copy = triples.copy()
+                            triples_copy[i] = relaxed_triple
+
+                            ordered_list = sorted(triples_copy)
+                            node_uuid = uuid.uuid3(namespace=ns, name=str(sorted(triples_copy)))
+
+                            if node_uuid not in G.nodes():
+                                G.add_node(node_uuid, query=sorted(triples_copy), node_id=num_nodes)
+                                G.add_edge(source_uuid, node_uuid, rule=rule_names[r_index], level=level, triple=i, source_node_id=source_node_id, destn_node_id=num_nodes)
+                                new_nodes_to_parse.append(node_uuid)
+                                num_nodes+=1
+
+        nodes_to_parse = new_nodes_to_parse
+        level+=1
+    return G

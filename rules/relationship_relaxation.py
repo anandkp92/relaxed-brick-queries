@@ -105,7 +105,7 @@ def apply_rule_variable_relationship(triple, triples=None):
                     possible_relaxation = False
                     
         if possible_relaxation:
-            relaxed_triples.append([t0, relationship, t2])
+            relaxed_triples.append([t0, parse_entity(relationship), t2])
 
     return relaxed_triples
 
@@ -116,6 +116,9 @@ def apply_rule_transitive_relationship(triple):
     t2 = parse_entity(triple[2])
     
     if t1.lower() == 'a' or t1.lower() =='rdf:type' or t1 == RDF['type']:
+        return []
+    
+    if t1[-1] == '+':
         return []
     
     return [[t0, t1+'+', t2]]

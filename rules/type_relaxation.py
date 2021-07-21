@@ -26,7 +26,7 @@ def ApplyRule_LowerClass(triple):
     relaxed_triples = []
     for lower_class in brick_graph.subjects(predicate=RDFS['subClassOf'], object=obj):
         if isinstance(lower_class, URIRef):
-            relaxed_triples.append([t0,  t1, lower_class])
+            relaxed_triples.append([t0,  t1, parse_entity(lower_class)])
     return relaxed_triples
 
 def ApplyRule_UpperClass(triple):
@@ -46,7 +46,7 @@ def ApplyRule_UpperClass(triple):
     relaxed_triples = []
     for upper_class in brick_graph.objects(subject=obj, predicate=RDFS['subClassOf']):
         if isinstance(upper_class, URIRef):
-            relaxed_triples.append([t0, t1, upper_class])
+            relaxed_triples.append([t0, t1, parse_entity(upper_class)])
     return relaxed_triples
 
 def ApplyRule_SiblingClass(triple):
