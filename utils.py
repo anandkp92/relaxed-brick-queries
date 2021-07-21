@@ -89,7 +89,7 @@ def get_all_brick_relationships():
                                 BRICK['hasInputSubstance'], BRICK['measures'], BRICK['isMeasuredBy'],
                                 BRICK['hasAddress'], BRICK['regulates'], BRICK['isRegulatedBy'],
                                 BRICK['timeseries'], BRICK['hasTag'], BRICK['isAssociatedWith'],
-                                BRICK['isControlledBy']
+                                BRICK['isControlledBy'], URIRef("http://www.w3.org/2006/vcard/ns#hasAddress")
                             ]
     for r in relationship_triples:
         relationship = r[0]
