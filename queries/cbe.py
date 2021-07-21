@@ -19,8 +19,7 @@ queries = [
 ?sup a brick:Supply_Water_Temperature_Sensor .
 ?ret a brick:Return_Water_Temperature_Sensor .
 ?boiler brick:hasPoint ?sup, ?ret .
-}
-    """,
+}""",
     """ SELECT * WHERE {
 ?zone a brick:HVAC_Zone .
 
@@ -79,6 +78,7 @@ queries = [
 
 ?zone_temp a brick:Zone_Air_Temperature_Sensor .
 ?zone_temp a brick:Zone_Air_Temperature_Setpoint .
+}
 """,
 """
 ?min_afs a brick:Min_Air_Flow_Setpoint_Limit .
