@@ -13,11 +13,12 @@ queries = [
     }
     """,
 
-    """ SELECT * WHERE {
+    """SELECT * WHERE {
 ?boiler a brick:Boiler .
 ?sup a brick:Supply_Water_Temperature_Sensor .
 ?ret a brick:Return_Water_Temperature_Sensor .
-?boiler brick:hasPoint ?sup, ?ret .
+?boiler brick:hasPoint ?sup .
+?boiler brick:hasPoint ?ret
 }
     """,
     """ SELECT * WHERE {
@@ -35,7 +36,7 @@ queries = [
 ?valve_pos a brick:Valve_Command .
 ?hv brick:hasPoint ?valve_pos .
 ?ahu brick:hasPart ?hv .
-?equip brick:hasPoint ?hv .
+?equip brick:hasPoint ?hv
 }
     """,
 
@@ -48,7 +49,7 @@ queries = [
 ?equip brick:feeds ?ahu .
 ?ahu a brick:Air_Handler_Unit .
 ?sup_air_sp a brick:Supply_Air_Temperature_Deadband_Setpoint .
-?ahu brick:hasPoint ?sup_air_sp .
+?ahu brick:hasPoint ?sup_air_sp
 }
 """,
 
@@ -59,7 +60,7 @@ queries = [
 ?equip a brick:HVAC .
 ?hw_supply_sp brick:isPointOf ? thing .
 ?thing brick:feeds+ ?equip .
-?equip brick:hasPart ?vlv .
+?equip brick:hasPart ?vlv
 }
 """,
 """ SELECT * WHERE {
@@ -72,7 +73,7 @@ queries = [
 ?ahu brick:hasPoint ?oat_sensor .
 ?ahu brick:feeds+ ?x .
 ?x brick:hasPoint ?zone_temp .
-?x brick:hasPoint ?zone_sp .
+?x brick:hasPoint ?zone_sp
 }
 """,
 """ SELECT * WHERE {
@@ -80,7 +81,7 @@ queries = [
 ?afs a brick:Air_Flow_Setpoint .
 ?vav a brick:VAV .
 ?vav brick:hasPoint ?min_afs .
-?vav brick:hasPoint ?afs .
+?vav brick:hasPoint ?afs
 }
 """,
 
@@ -94,7 +95,7 @@ queries = [
 ?status a brick:Fan_Status .
 ?fan brick:hasPoint ?status .
 ?fan brick:isPartOf ?ahu .
-?oat a brick:Outside_Air_Temperature_Sensor .
+?oat a brick:Outside_Air_Temperature_Sensor
 }
 """,
 
@@ -107,7 +108,7 @@ queries = [
 ?md_cmd a brick:Damper_Position_Command .
 ?ahu a brick:Air_Handler_Unit .
 ?ahu brick:hasPart ?rd .
-?ahu brick:hasPart ?md .
+?ahu brick:hasPart ?md
 }
 """,
 
@@ -125,7 +126,7 @@ queries = [
 ?vav brick:hasPoint ?dat .
 ?ahu brick:feeds+ ?vav .
 ?ahu brick:hasPoint ?ahu_temp .
-?ahu_temp a brick:Temperature_Sensor .
+?ahu_temp a brick:Temperature_Sensor
 }
 """,
 ]
