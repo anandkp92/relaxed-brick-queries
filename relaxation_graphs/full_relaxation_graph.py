@@ -9,7 +9,7 @@ import uuid
 
 brick_graph = brickschema.Graph(load_brick=True)
 
-def get_relaxed_graph(query):
+def get_relaxed_graph(query, max_level=-1):
     triples = extract_triples(query)
     
     rules = [ApplyRule_UpperClass, apply_rule_variable_relationship, apply_rule_transitive_relationship]
@@ -20,7 +20,7 @@ def get_relaxed_graph(query):
 
     num_nodes = 0
     origin_uuid = uuid.uuid3(namespace=ns, name=str(sorted(triples)))
-    G.add_node(origin_uuid, query=sorted(triples), node_id=num_nodes)
+    G.add_node(origin_uuid, query=sorted(triples), node_id=num_nodes, level=0)
     num_nodes+=1
 
     nodes_to_parse = [origin_uuid]
@@ -28,6 +28,8 @@ def get_relaxed_graph(query):
     already_parsed_uuids = []
     level = 1
     while len(nodes_to_parse) > 0:
+        if max_level >= 0 and level > max_level:
+            return G
         new_nodes_to_parse = []
 
         for source_uuid in nodes_to_parse:
@@ -54,7 +56,7 @@ def get_relaxed_graph(query):
                             node_uuid = uuid.uuid3(namespace=ns, name=str(sorted(triples_copy)))
 
                             if node_uuid not in G.nodes():
-                                G.add_node(node_uuid, query=sorted(triples_copy), node_id=num_nodes)
+                                G.add_node(node_uuid, query=sorted(triples_copy), node_id=num_nodes, level=level)
                                 G.add_edge(source_uuid, node_uuid, rule=rule_names[r_index], level=level, triple=i, source_node_id=source_node_id, destn_node_id=num_nodes)
                                 new_nodes_to_parse.append(node_uuid)
                                 num_nodes+=1
