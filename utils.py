@@ -45,9 +45,26 @@ def get_namespace(x):
 
 def parse_entity(t):
     if isinstance(t, URIRef):
-        return t.rsplit('/',1)[1].replace('#',':')
+        ns_entity = t.rsplit('/',1)[1].split('#')
+        ns = ns_entity[0].lower()
+        entity = ns_entity[1]
+        
+        return ns+':'+entity
     else:
-        return t    
+        return t
+    
+def get_entity_with_namespace(x):
+    if x[0] != '?':
+        ns = get_namespace(x)
+        if ':' in x:
+            entity = x.split(':')[1]
+        elif '#' in x:
+            entity = x.split('#')[1]
+        else:
+            entity = None
+        if entity is not None and ns is not None:
+            return ns[entity]
+    return None
 
 def get_inverse_relationship(relationship):
     inverse_relns = list(brick_graph.triples((relationship, OWL['inverseOf'], None)))
@@ -153,3 +170,45 @@ def get_super_classes(entity):
             if isinstance(sup, URIRef):
                 super_classes.append(sup)
         return super_classes
+    
+def get_type_from_triples(entity, triples):
+    if entity is None or triples is None:
+        return None
+    if len(triples) == 0:
+        return None
+    
+    for triple in triples:
+        t0 = triple[0]
+        t1 = triple[1]
+        if t0 == entity and (t1 == 'a' or t1 == 'rdf:type'):
+            return get_entity_with_namespace(triple[2])
+    return None
+
+def run_brick_query(building_model, query):
+    try:
+        res = building_model.query(query)
+
+        op = []
+        for row in res:
+            op.append(row[0])
+
+        return op
+    except:
+        return []
+    
+def generate_brick_query_from_node(triples, select_statement=None):
+    q = """"""
+    if select_statement is not None:
+        if select_statement[-1] != "\n":
+            select_statement+="\n"
+        q+=select_statement
+    else:
+        q="""SELECT ?vav WHERE {\n"""
+    for triple in triples:
+        t0 = parse_entity(triple[0])
+        t1 = parse_entity(triple[1])
+        t2 = parse_entity(triple[2])
+
+        q+=" ".join([t0, t1, t2]) + " . \n"
+    q+="}"
+    return q
