@@ -1,6 +1,7 @@
 import brickschema
 from brickschema.namespaces import BRICK, RDFS, OWL, TAG, RDF
 from rdflib import URIRef
+import os 
 
 brick_graph = brickschema.Graph(load_brick=True)
 
@@ -120,7 +121,11 @@ def get_relationship_domain_range_map():
 
 def get_shacl_relationship_map():
     g = brickschema.Graph()
-    g.parse("https://raw.githubusercontent.com/BrickSchema/Brick/master/shacl/BrickEntityShapeBase.ttl", format="ttl")
+    # g.parse("https://raw.githubusercontent.com/BrickSchema/Brick/master/shacl/BrickEntityShapeBase.ttl", format="ttl")
+    if "BrickEntityShapeBase.ttl" in os.listdir():
+        g.load_file("BrickEntityShapeBase.ttl")
+    else:
+        g.load_file("../BrickEntityShapeBase.ttl")
 
     q = """SELECT ?cls ?path ?allowed WHERE {
         ?sh a sh:NodeShape .

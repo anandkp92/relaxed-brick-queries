@@ -8,14 +8,14 @@ import datetime
 
 brick_graph = brickschema.Graph(load_brick=True)
 
-def get_optimized_evaluation_metrics(file, query):
+def get_optimized_evaluation_metrics(file, query, max_level=-1):
     g = brickschema.Graph(load_brick=True)
     g.load_file(file)
     g.expand(profile="owlrl")
     select_statement = query.split("{")[0] + "{\n"
     
     relaxation_start_time = datetime.datetime.now()
-    G, results = get_optimized_relaxed_graph(query=query, building_model=g)
+    G, results = get_optimized_relaxed_graph(query=query, building_model=g, max_level=max_level)
     relaxation_end_time = datetime.datetime.now()
     
     querying_start_time = datetime.datetime.now()

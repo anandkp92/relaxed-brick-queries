@@ -27,6 +27,7 @@ def get_optimized_relaxed_graph(query, building_model, max_level=-1):
     
     brick_query = generate_brick_query_from_node(triples, select_statement=select_statement)
     res = run_brick_query(building_model=building_model, query=brick_query)
+    results[origin_uuid] = res
     if len(res) == 0:
         nodes_to_parse = [origin_uuid]
     else:
@@ -37,7 +38,7 @@ def get_optimized_relaxed_graph(query, building_model, max_level=-1):
 
     while len(nodes_to_parse) > 0:
         if max_level >= 0 and level > max_level:
-            return G
+            return G, results
         new_nodes_to_parse = []
 
         for source_uuid in nodes_to_parse:
