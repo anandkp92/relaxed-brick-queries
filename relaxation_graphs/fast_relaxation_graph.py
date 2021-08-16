@@ -40,8 +40,9 @@ def get_fast_relaxed_graph(query, max_level=-1):
 
             transitive_relations = []
             for i in range(len(relaxation)):
-                transitive_relations.append(apply_rule_transitive_relationship(triple=relaxation[i])[0])
-                levels.append(levels[i]+1)
+                if relaxation[i][1][-1] != '+':
+                    transitive_relations.append(apply_rule_transitive_relationship(triple=relaxation[i])[0])
+                    levels.append(levels[i]+1)
             relaxation = relaxation+transitive_relations
         relaxation_matrix.append(relaxation)
         level_matrix.append(levels)

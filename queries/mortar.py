@@ -45,8 +45,7 @@ queries = [
     }""",
 """SELECT * WHERE {
     ?equip        rdf:type   brick:VAV .
-    ?equip        brick:isFedBy+                 ?ahu .
-    ?vlv          rdf:type                    ?vlv_type .
+    ?equip        brick:isFedBy                 ?ahu .
     ?ahu          brick:hasPoint                 ?upstream_ta .
     ?equip        brick:hasPoint                 ?dnstream_ta .
     ?upstream_ta  rdf:type   brick:Supply_Air_Temperature_Sensor .
