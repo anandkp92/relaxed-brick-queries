@@ -75,6 +75,11 @@ bsh:EquipmentShape a sh:NodeShape ;
         sh:class brick:Point;
         sh:message "A piece of Equipment may have associated Points"
     ];
+    sh:property [
+        sh:path brick:isFedBy;
+        sh:class brick:Equipment;
+        sh:message "Equipments can be fed only by other Equipment."
+    ];
     .
 
 bsh:PointShape a sh:NodeShape;
